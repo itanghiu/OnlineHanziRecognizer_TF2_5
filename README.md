@@ -1,45 +1,74 @@
-## OnlineHanziRecognizer
+# OnlineHanziRecognizer
+
+This project is an implementation of the paper "Deep Convolutional Network for Handwritten Chinese Character Recognition" by Yuhao ZHUANG.
+It is based on a convolutional neural network (CNN)
 
 ### Requirements :
 Python version: 3.6.3
-Tensorflow version: 1.14.0
 
-> Install Python 3.6.3
-> pip3 install --upgrade tensorflow==1.14.0
+Tensorflow version: 2.5.0
 
+### Installing the dependencies :
 
-#### Generate the training and test dataset:
+```
+pip install -r requirements.txt
+```
 
-The dataset used is the HWDB1.1 dataset. To download it :
+## Project options
+
+### Generate the training and test dataset:
+
+The dataset used is the HWDB1.1 dataset. 
+This dataset contains 3,755 Chinese characters and 171 alphanumeric
+and symbols. Each class of character is represented by 300 handwritten images drawn by 300 writers. 
+Each writer has written the 3 755 Chinese characters. 
+
+To download it :
 http://www.nlpr.ia.ac.cn/databases/download/feature_data/HWDB1.1trn_gnt.zip
 http://www.nlpr.ia.ac.cn/databases/download/feature_data/HWDB1.1tst_gnt.zip
 
-In ImageDatasetGeneration.py, set the CASIA_DIR variable to the path where you installed the dataset
-> python ImageDatasetGeneration.py
+In ImageDatasetGeneration.py, set the CASIA_DIR variable to the path where you installed the dataset.
 
-#### Start training:
+``` python ImageDatasetGeneration.py ```
 
- Script path: PATH_TO_PROJECT\OnlineHanziRecognizer_tf1_14_0\start.py
- Working directory : PATH_TO_PROJECT\OnlineHanziRecognizer_tf1_14_0
-> python start.py --mode=training
+### Start training:
 
-#### Launching the Web server :
+``` python start.py --mode=training ```
 
-- > pip install tensorflow==1.13.2
-- > pip install Flask
-- > pip install Image
-- > pip install opencv-python
-- > 
+To visualize metrics such as loss and accuracy using Tensorboard :
 
- Script path : PATH_TO_PROJECT\OnlineHanziRecognizer_tf1_14_0\app.py
- Working directory : PATH_TO_PROJECT\OnlineHanziRecognizer_tf1_14_0
-> python app.py
+``` tensorboard --logdir=./logs/ --port=8090 --host=127.0.0.1 ```
+ 
+In a browser , go to : http://localhost:8090/
+
+### Launching the Web server :
+
+The project comes with a simple web user interface for drawing characters with the mouse.
+The interface displays the recognized characters, as the character is drawn.
+
+``` python app.py ``` 
+
 In a browser , go to : http://localhost:5000/
 
-#### Start tensorBoard:
+### Recognizing images 
 
-tensorboard --logdir=./logs/ --port=8090 --host=127.0.0.1
-In a browser , go to : http://localhost:8090/
+``` python  start.py --mode=recognize_image ```
+
+### Convert the model to TensorLite
+
+``` python  start.py --mode=convert_to_tensor_lite ```
+
+## The model training
+
+The implemented model corresponds to the M6 model as defined in the paper.
+Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.2 %.
+
+
+
+
+
+
+
 
  
 

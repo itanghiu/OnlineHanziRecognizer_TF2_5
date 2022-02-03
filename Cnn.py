@@ -369,7 +369,6 @@ class Cnn(Model):
 
         self.model.add(self.conv3_2)
         self.model.add(BatchNormalization())
-
         self.model.add(self.max_pool_2)
 
         self.model.add(self.conv3_3)
@@ -382,7 +381,6 @@ class Cnn(Model):
 
         self.model.add(self.flatten)
         self.model.add(self.fc1)
-        #self.model.add(self.dropout1)
         self.model.add(BatchNormalization())
         self.model.add(self.logits)
         return self.model
