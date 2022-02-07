@@ -1,7 +1,9 @@
 # OnlineHanziRecognizer
 
 This project is an implementation of the paper "Deep Convolutional Network for Handwritten Chinese Character Recognition" by Yuhao ZHUANG.
-It is based on a convolutional neural network (CNN)
+It is based on a convolutional neural network (CNN) trained on the [CASIA](http://www.nlpr.ia.ac.cn/databases/handwriting/Touching_Characters_Databases.html) database (database of handwritten chinese characters with annotation).
+
+
 
 ### Requirements :
 Python version: 3.6.3
