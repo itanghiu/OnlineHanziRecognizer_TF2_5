@@ -70,11 +70,21 @@ In a browser , go to : http://localhost:5000/
 
 ## The model training
 
-The implemented model corresponds to the six layers M6 model as defined in the paper. The corresponding CNN architecture is below:
+The implemented model corresponds to the six layers M6 model as defined in the paper. 
+the only difference between the architecture defined in the paper and the one of this project, is :
+ - the addition of BatchNormalization layers after every convolutional layers,
+ - the replacement of Dropout layers after the fully connected layers with BatchNormalisation layers.
+
+The BatchNormalization layers were added because I could not have the network to start learning without them.
+The dropout layers were removed because the BatchNormalisation layers plays the same role as dropout layers. 
+
+The corresponding CNN architecture is below:
 
 ![CNN architecture](doc/cnn_architecture.png "CNN architecture")
 
 Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 % and 93.1 % on test set.
+
+An epoch takes 4 hours and 40 minutes to complete.
 
 ### Batch loss
 
