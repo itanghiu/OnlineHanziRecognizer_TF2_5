@@ -9,7 +9,7 @@ ROOT_LOG_DIR = os.path.join(os.curdir, LOG_DIR)
 CHECKPOINT = 'checkpoint'
 CHECKPOINT_DIR =  os.path.join(os.curdir, CHECKPOINT)
 FIRST_TOP_CHARACTERS = 3
-BATCH_SIZE = 170 # 490
+BATCH_SIZE = 250 #250 #170 # 490
 VALIDATION_FREQ = 1 #150
 
 # ROOT='C:\Users\I-Tang\DATA\DEV\TENSORFLOW\OnlineHanziRecognizer_tf'

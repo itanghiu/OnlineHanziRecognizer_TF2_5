@@ -11,7 +11,7 @@ from os import path
 import math
 from PIL import Image
 import numpy as np
-import ImageDatasetGeneration
+import ImageDatasetGeneration3
 from tensorflow import keras
 from tensorflow.keras import datasets, layers, models, callbacks,optimizers, utils
 from tensorflow.keras.layers import Conv2D
@@ -48,10 +48,10 @@ logger = logging.getLogger('Cnn.py')
 logger.setLevel(logging.INFO)
 
 # builds the map whose keys are labels and values characters
-label_char_dico = get_label_char_dico(ImageDatasetGeneration.CHAR_LABEL_DICO_FILE_NAME)
+label_char_dico = get_label_char_dico(ImageDatasetGeneration3.CHAR_LABEL_DICO_FILE_NAME)
 MODEL_NAME = 'hanzi_recog_model'
 #STEPS_PER_EPOCH = 25
-LEARNING_RATE = 5e-3  # 5e-3 #5e-2
+LEARNING_RATE = 5e-4  # 5e-3 #5e-2
 
 
 class Cnn(Model):
@@ -115,10 +115,10 @@ class Cnn(Model):
         data_generator = ImageDataGenerator(preprocessing_function = preprocess_image)
 
         #images = self.get_images()
-        print('fitting images() ...')
+        #print('fitting images() ...')
         start = t.time()
         #data_generator.fit(images)
-        print('fitting images() took {:.2f} s'.format(t.time() - start))
+        #print('fitting images() took {:.2f} s'.format(t.time() - start))
         train_iterator = data_generator.flow_from_directory(self.training_path, color_mode='grayscale', target_size=(Csts.IMAGE_SIZE, Csts.IMAGE_SIZE), batch_size=Csts.BATCH_SIZE, class_mode='categorical')
         validation_iterator = data_generator.flow_from_directory(self.validation_path, color_mode='grayscale', target_size=(Csts.IMAGE_SIZE, Csts.IMAGE_SIZE), batch_size=Csts.BATCH_SIZE, class_mode='categorical')
         test_iterator = data_generator.flow_from_directory(self.test_path, color_mode='grayscale', target_size=(Csts.IMAGE_SIZE, Csts.IMAGE_SIZE), batch_size=Csts.BATCH_SIZE, class_mode='categorical')
@@ -291,8 +291,7 @@ class Cnn(Model):
         print('Score:', score)
 
 
-
-    def build_graph0(self, class_size):
+    def build_graph(self, class_size):
 
         self.model = models.Sequential()
         input_shape = (Csts.IMAGE_SIZE, Csts.IMAGE_SIZE, 1)
@@ -318,52 +317,6 @@ class Cnn(Model):
         self.logits = Dense(class_size, activation='softmax')
 
         self.model.add(self.conv3_1)
-        self.model.add(self.max_pool_1)
-
-        self.model.add(self.conv3_2)
-        self.model.add(self.max_pool_2)
-
-        self.model.add(self.conv3_3)
-        self.model.add(self.max_pool_3)
-
-        self.model.add(self.conv3_4)
-        self.model.add(self.max_pool_4)
-
-        self.model.add(self.flatten)
-
-        self.model.add(self.fc1)
-        self.model.add(self.dropout1)
-        #self.model.add(self.fc2)
-        self.model.add(BatchNormalization())
-        self.model.add(self.logits)
-        # self.model.add(dropout2)
-        return self.model
-
-    def build_graph(self, class_size):
-
-        self.model = models.Sequential()
-        input_shape = (Csts.IMAGE_SIZE, Csts.IMAGE_SIZE, 1)
-        self.conv3_1 = Conv2D(64, kernel_size=(3, 3), padding='same', activation='relu', input_shape=input_shape)
-        self.max_pool_1 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_2 = Conv2D(128, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_2 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_3 = Conv2D(256, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_3 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_4 = Conv2D(512, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_4 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.flatten = Flatten()
-        self.fc1 = Dense(1024, activation='relu', kernel_regularizer=l2(Cnn.WEIGHT_DECAY))
-        #self.fc1 = Dense(1024, activation='relu')
-        #self.dropout1 = Dropout(Cnn.KEEP_NODES_PROBABILITY)
-        #self.fc2 = Dense(class_size, activation='relu', kernel_regularizer=l2(Cnn.WEIGHT_DECAY))
-        #self.dropout2 = Dropout(Cnn.KEEP_NODES_PROBABILITY)
-        self.logits = Dense(class_size, activation='softmax')
-
-        self.model.add(self.conv3_1)
         self.model.add(BatchNormalization())
         self.model.add(self.max_pool_1)
 
@@ -382,49 +335,11 @@ class Cnn(Model):
         self.model.add(self.flatten)
         self.model.add(self.fc1)
         self.model.add(BatchNormalization())
+        self.model.add(self.fc2)
+        self.model.add(BatchNormalization())
         self.model.add(self.logits)
         return self.model
 
-    def build_graph3(self, class_size):
-
-        self.model = models.Sequential()
-        input_shape = (Csts.IMAGE_SIZE, Csts.IMAGE_SIZE, 1)
-        self.conv3_1 = Conv2D(64, kernel_size=(3, 3), padding='same', activation='relu', input_shape=input_shape)
-        self.max_pool_1 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_2 = Conv2D(128, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_2 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_3 = Conv2D(256, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_3 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.conv3_4 = Conv2D(512, kernel_size=(3, 3), padding='same', activation='relu')
-        self.max_pool_4 = MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='same')
-
-        self.flatten = Flatten()
-        self.fc1 = Dense(1024, activation='relu', kernel_regularizer=l2(Cnn.WEIGHT_DECAY))
-        # self.fc1 = Dense(1024, activation='relu')
-        self.dropout1 = Dropout(Cnn.KEEP_NODES_PROBABILITY)
-        self.fc2 = Dense(class_size, activation='relu', kernel_regularizer=l2(Cnn.WEIGHT_DECAY))
-        self.dropout2 = Dropout(Cnn.KEEP_NODES_PROBABILITY)
-        self.logits = Dense(class_size, activation='softmax')
-
-        self.model.add(self.conv3_1)
-        self.model.add(self.max_pool_1)
-        self.model.add(self.conv3_2)
-        self.model.add(self.max_pool_2)
-        self.model.add(self.conv3_3)
-        self.model.add(self.max_pool_3)
-        self.model.add(self.conv3_4)
-        self.model.add(self.max_pool_4)
-        self.model.add(self.flatten)
-        self.model.add(self.fc1)
-        self.model.add(self.dropout1)
-        # self.model.add(self.fc2)
-        # self.model.add(self.dropout2)
-        self.model.add(self.logits)
-        # self.model.add(dropout2)
-        return self.model
 
     def load_model(self):
         print('Loading model...')
