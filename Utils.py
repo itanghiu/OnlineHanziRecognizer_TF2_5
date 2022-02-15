@@ -53,8 +53,9 @@ def increase_contrast2(img):
     img = exposure.equalize_hist(img)
     return img
 
+# Center image pixels values in [-0.5, +0.5]
 def center_image_mean(img):
-    img = img -1
+    img = img -0.5
     return img
 
 def preprocess_image(img):
