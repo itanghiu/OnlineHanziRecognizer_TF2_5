@@ -51,8 +51,6 @@ To visualize metrics such as loss and accuracy using Tensorboard :
  
 In a browser , go to : http://localhost:8090/
 
-The first epoch lasted (3:)
-
 ### Launching the Web server :
 
 The project comes with a simple web user interface for drawing characters with the mouse.
@@ -76,7 +74,7 @@ The implemented model corresponds to the six layers M6 model as defined in the p
 
 ![CNN architecture](doc/cnn_architecture.png "CNN architecture")
 
-Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 and xx.xx % on test set.
+Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 and 93.1 % on test set.
 
 ### Batch loss
 
