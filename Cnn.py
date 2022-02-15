@@ -11,7 +11,7 @@ from os import path
 import math
 from PIL import Image
 import numpy as np
-import ImageDatasetGeneration3
+import ImageDatasetGeneration
 from tensorflow import keras
 from tensorflow.keras import datasets, layers, models, callbacks,optimizers, utils
 from tensorflow.keras.layers import Conv2D

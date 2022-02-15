@@ -12,6 +12,26 @@ Tensorflow version: 2.5.0
 
 ### Installing the dependencies :
 
+Create a virtual environment:
+
+```
+python -m pip install --user virtualenv
+```
+
+At the root of the project :
+
+```
+virtualenv venv
+```
+
+Activate it :
+
+```
+venv\Scripts\activate.bat
+```
+
+Install the dependencies:
+
 ```
 pip install -r requirements.txt
 ```
