@@ -6,3 +6,5 @@ flask==2.0.1
 scipy
 Image
 opencv-python
+matplotlib
+scikit-image

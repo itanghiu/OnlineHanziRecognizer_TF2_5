@@ -48,7 +48,7 @@ logger = logging.getLogger('Cnn.py')
 logger.setLevel(logging.INFO)
 
 # builds the map whose keys are labels and values characters
-label_char_dico = get_label_char_dico(ImageDatasetGeneration3.CHAR_LABEL_DICO_FILE_NAME)
+label_char_dico = get_label_char_dico(ImageDatasetGeneration.CHAR_LABEL_DICO_FILE_NAME)
 MODEL_NAME = 'hanzi_recog_model'
 #STEPS_PER_EPOCH = 25
 LEARNING_RATE = 5e-4  # 5e-3 #5e-2
