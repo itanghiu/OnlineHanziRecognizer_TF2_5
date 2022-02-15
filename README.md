@@ -70,11 +70,11 @@ In a browser , go to : http://localhost:5000/
 
 ## The model training
 
-The implemented model corresponds to the six layers M6 model as defined in the paper:
+The implemented model corresponds to the six layers M6 model as defined in the paper. The corresponding CNN architecture is below:
 
 ![CNN architecture](doc/cnn_architecture.png "CNN architecture")
 
-Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 and 93.1 % on test set.
+Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 % and 93.1 % on test set.
 
 ### Batch loss
 
@@ -84,6 +84,8 @@ Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) an
 ### Training/validation accuracy per epoch
 
 ![_Training/validation accuracy per epoch_](images/epoch_accuracy.png "Batch loss")
+
+![Labels](images/labels.png "Labels")
 
 
 
