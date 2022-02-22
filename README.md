@@ -102,7 +102,7 @@ The corresponding CNN architecture is below:
 
 ![CNN architecture](doc/cnn_architecture.png "CNN architecture")
 
-Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 93.33 % and 93.1 % on test set.
+Training took 2 days on a Dell XPS (16 Go, Nvidia GeForce GTX 1050 with 4 Gb) and accuracy on validation set is 94 % and 89.76 % on test set.
 
 An epoch takes 4 hours and 40 minutes to complete.
 

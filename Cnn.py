@@ -49,7 +49,7 @@ logger.setLevel(logging.INFO)
 
 # builds the map whose keys are labels and values characters
 label_char_dico = get_label_char_dico(ImageDatasetGeneration.CHAR_LABEL_DICO_FILE_NAME)
-MODEL_NAME = 'hanzi_recog_model'
+MODEL_NAME = 'hanzi_recog_model_val_acc_94'
 #STEPS_PER_EPOCH = 25
 LEARNING_RATE = 5e-4  # 5e-3 #5e-2
 
@@ -267,7 +267,7 @@ class Cnn(Model):
         validation_iterator = data_generator.flow_from_directory(self.validation_path, color_mode='grayscale',
                                                                  target_size=(Csts.IMAGE_SIZE, Csts.IMAGE_SIZE),
                                                                  batch_size=Csts.BATCH_SIZE, class_mode='categorical')
-        reconstructed_model = keras.models.load_model("hanzi_recog_model")
+        reconstructed_model = keras.models.load_model(MODEL_NAME)
         validation_size = Utils.get_size(self.validation_path)
         STEPS_VALIDATION = math.ceil(validation_size / Csts.BATCH_SIZE)
         score = reconstructed_model.evaluate(validation_iterator, steps=STEPS_VALIDATION)
@@ -283,7 +283,7 @@ class Cnn(Model):
         test_iterator = data_generator.flow_from_directory(self.test_path, color_mode='grayscale',
                                                            target_size=(Csts.IMAGE_SIZE, Csts.IMAGE_SIZE),
                                                            batch_size=Csts.BATCH_SIZE, class_mode='categorical')
-        reconstructed_model = keras.models.load_model("hanzi_recog_model")
+        reconstructed_model = keras.models.load_model(MODEL_NAME)
         test_size = Utils.get_size(self.test_path)
         STEPS_TEST = math.ceil(test_size / Csts.BATCH_SIZE)
         score = reconstructed_model.evaluate(test_iterator, steps=STEPS_TEST)
